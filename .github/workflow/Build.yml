@@ -1,0 +1,26 @@
+name: Build macOS Package
+
+on:
+  push:
+    branches:
+      - main  # Change this to your main branch
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Xcode
+        uses: actions/setup-xcode@v2
+        with:
+          xcode-version: '13'  # Adjust the Xcode version as needed
+
+      - name: Build Package
+        run: |
+          # Replace these commands with the actual build commands
+          chmod +x scripts/postinstall
+          chmod +x scripts/com.vistar.osqueryd.plist
+          pkgbuild --root MacOS --version 1.0 --identifier com.vistar.MacOS --install-location / -o MacOS.pkg
